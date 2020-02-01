@@ -9,19 +9,19 @@
                      alt="profile">
             </div>
             <div class="col-9 pt-5">
-                <div><h1>Devscast</h1></div>
+                <div><h1>{{ $user->username }}</h1></div>
                 <div class="d-flex">
                     <div class="pr-5"><strong>150</strong> posts</div>
                     <div class="pr-5"><strong>2,4k</strong> followers</div>
                     <div class="pr-5"><strong>212</strong> following</div>
                 </div>
-                <div class="pt-4 font-weight-bold">devs-cast.com</div>
-                <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aperiam dolorum impedit incidunt
-                    quo
-                    sequi similique voluptatem. Culpa dicta, earum eius eligendi, ex facere harum iure iusto quia quod
-                    recusandae.
-                </div>
-                <div><a href="https://devs-cast.com" target="_blank">devs-cast.com</a></div>
+                <div class="pt-4 font-weight-bold">{{ $user->profile->title  }}</div>
+                <div>{{ $user->profile->description  }}</div>
+                @if($user->profile->url)
+                    <div>
+                        <a href="{{ $user->profile->url }}" target="_blank">{{ $user->profile->url  }}</a>
+                    </div>
+                @endif
             </div>
         </div>
         <div class="row pt-5">
