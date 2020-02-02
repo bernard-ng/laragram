@@ -9,9 +9,12 @@
                      alt="profile">
             </div>
             <div class="col-9 pt-5">
-                <div><h1>{{ $user->username }}</h1></div>
+                <div class="d-flex justify-content-between align-items-baseline">
+                    <h1>{{ $user->username }}</h1>
+                    <a href="{{ route('posts.create') }}" class="btn btn-primary">Add new post</a>
+                </div>
                 <div class="d-flex">
-                    <div class="pr-5"><strong>150</strong> posts</div>
+                    <div class="pr-5"><strong>{{ $user->posts->count() }}</strong> posts</div>
                     <div class="pr-5"><strong>2,4k</strong> followers</div>
                     <div class="pr-5"><strong>212</strong> following</div>
                 </div>
@@ -25,33 +28,11 @@
             </div>
         </div>
         <div class="row pt-5">
-            <div class="col-4">
-                <img alt="Image may contain: screen"
-                     class="w-100"
-                     decoding="auto"
-                     sizes="293px"
-                     src="http://localhost/photofills/500/500"
-                     style="object-fit: cover;"
-                >
-            </div>
-            <div class="col-4">
-                <img alt="Image may contain: screen"
-                     class="w-100"
-                     decoding="auto"
-                     sizes="293px"
-                     src="http://localhost/photofills/500/500"
-                     style="object-fit: cover;"
-                >
-            </div>
-            <div class="col-4">
-                <img alt="Image may contain: screen"
-                     class="w-100"
-                     decoding="auto"
-                     sizes="293px"
-                     src="http://localhost/photofills/500/500"
-                     style="object-fit: cover;"
-                >
-            </div>
+            @foreach($user->posts as $post)
+                <div class="col-4 pb-5">
+                    <img alt="{{ $post->title  }}" class="w-100" src="/storage/{{ $post->image }}">
+                </div>
+            @endforeach
         </div>
     </div>
 @endsection

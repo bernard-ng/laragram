@@ -6,16 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * Class Profile
+ * Class Post
  * @package App
  * @author bernard-ng <ngandubernard@gmail.com>
  */
-class Profile extends Model
+class Post extends Model
 {
 
-    protected $fillable = [
-        'title', 'description', 'url'
-    ];
+    protected $fillable = ['caption', 'image', 'title'];
 
     /**
      * @return BelongsTo
