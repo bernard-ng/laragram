@@ -15,14 +15,8 @@ use Illuminate\Contracts\View\Factory;
 class ProfilesController extends Controller
 {
 
-    /**
-     * @param User $user
-     * @return Factory|View
-     * @author bernard-ng <ngandubernard@gmail.com>
-     */
-    public function index($user)
+    public function index(User $user)
     {
-        $user = User::findOrFail($user);
         return view('profiles.index', compact('user'));
     }
 
