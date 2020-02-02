@@ -2,12 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Post;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\View\View;
+use Intervention\Image\Facades\Image;
 
 /**
  * Class PostsController
@@ -22,15 +17,10 @@ class PostsController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * @return Factory|View
-     * @author bernard-ng <ngandubernard@gmail.com>
-     */
     public function create()
     {
         return view('posts.create');
     }
-
 
     public function store()
     {
@@ -39,10 +29,14 @@ class PostsController extends Controller
             'image' => ['required', 'image']
         ]);
 
-        $imagepath = request('image')->store('uploads', "public");
+        $imagePath = request('image')->store('uploads', "public");
+        /*Image::make(public_path("storage/{$imagePath}"))
+            ->fit(1200, 1200)
+            ->save();*/
+
         auth()->user()->posts()->create([
             'caption' => $data['caption'],
-            'image' => $imagepath,
+            'image' => $imagePath,
             'title' => 'default'
         ]);
 
