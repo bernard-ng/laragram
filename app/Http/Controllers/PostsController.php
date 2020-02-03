@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response as HttpResponse;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
 use Intervention\Image\Facades\Image;
 
 /**
@@ -18,35 +23,50 @@ class PostsController extends Controller
         $this->middleware('auth');
     }
 
-    public function create()
+    /**
+     * @return HttpResponse
+     * @author bernard-ng <ngandubernard@gmail.com>
+     */
+    public function create(): HttpResponse
     {
-        return view('posts.create');
+        return Response::view('posts.create');
     }
 
-    public function show(Post $post)
+    /**
+     * @param Post $post
+     * @return HttpResponse
+     * @author bernard-ng <ngandubernard@gmail.com>
+     */
+    public function show(Post $post): HttpResponse
     {
-        return view('posts.show', compact('post'));
+        return Response::view('posts.show', compact('post'));
     }
 
-    public function store()
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     * @author bernard-ng <ngandubernard@gmail.com>
+     */
+    public function store(Request $request): RedirectResponse
     {
-        $data = request()->validate([
+        $user = Auth::user();
+        $data = $request->validate([
             'caption' => ['required', 'max:255'],
             'image' => ['required', 'image']
         ]);
 
-        $imagePath = request('image')->store('uploads', "public");
+        $imagePath = $request->image->store('uploads', "public");
         /*Image::make(public_path("storage/{$imagePath}"))
             ->fit(1200, 1200)
             ->save();*/
 
-        auth()->user()->posts()->create([
+        $user->posts()->create([
             'caption' => $data['caption'],
             'image' => $imagePath,
             'title' => 'default'
         ]);
 
-        return redirect(route('profile.show', ['user' => auth()->user()->id]));
+        return Response::redirectToRoute('profiles.show', ['user' => $user->id]);
     }
 
 }

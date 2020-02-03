@@ -5,11 +5,6 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-/**
- * Class Post
- * @package App
- * @author bernard-ng <ngandubernard@gmail.com>
- */
 class Post extends Model
 {
 

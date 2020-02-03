@@ -4,14 +4,19 @@
     <div class="container">
         <div class="row">
             <div class="col-3 p-5">
-                <img class="rounded-circle"
-                     src="https://scontent-jnb1-1.cdninstagram.com/v/t51.2885-19/s150x150/81339546_2457344691181321_108807275547721728_n.jpg?_nc_ht=scontent-jnb1-1.cdninstagram.com&_nc_ohc=XxDnJJlDVHwAX-iqdSR&oh=e359f1ce233dce6f3753373e51372ef2&oe=5EB9300C"
-                     alt="profile">
+                <img class="rounded-circle" src="/storage/{{ $user->profile->image }}" alt="profile">
             </div>
             <div class="col-9 pt-5">
                 <div class="d-flex justify-content-between align-items-baseline">
                     <h1>{{ $user->username }}</h1>
-                    <a href="{{ route('posts.create') }}" class="btn btn-primary">Add new post</a>
+                    @can('update', $user->profile)
+                        <div class="btn-group">
+                            <a href="{{ route('posts.create') }}" class="btn btn-primary">Add new post</a>
+                            <a href="{{ route('profiles.edit', ['user' => $user->id]) }}" class="btn btn-primary">
+                                Edit Profile
+                            </a>
+                        </div>
+                    @endcan
                 </div>
                 <div class="d-flex">
                     <div class="pr-5"><strong>{{ $user->posts->count() }}</strong> posts</div>
