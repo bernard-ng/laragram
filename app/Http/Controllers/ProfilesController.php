@@ -61,14 +61,12 @@ class ProfilesController extends Controller
         ]);
 
         if ($request->image) {
-            $imagePath = $request->image->store('profile', 'public');
+            $imagePath = $request->image->store('profiles', 'public');
             //Image::make(public_path("storage/{$imagePath}"))->fit(1000, 1000)->save();
+            $data = array_merge($data, ['image' => $imagePath]);
         }
 
-        $user->profile()->update(
-            array_merge($data, ['image' => $imagePath ?? null])
-        );
-
+        $user->profile()->update($data);
         return Response::redirectToRoute('profiles.show', ['user' => $user->id]);
     }
 

@@ -41,7 +41,7 @@
                                     value="{{ old('description') ?? $user->profile->description }}"
                                     autocomplete="description"
                                 >
-                                @error('name')
+                                @error('description')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                 </span>
@@ -56,7 +56,7 @@
                                     value="{{ old('url') ?? $user->profile->url }}"
                                     autocomplete="url"
                                 >
-                                @error('name')
+                                @error('url')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                 </span>
