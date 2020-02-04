@@ -15,7 +15,7 @@
                 <div class="d-flex justify-content-between align-items-baseline">
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <h4 class="pr-3">{{ $user->username }}</h4>
-                        <button class="btn btn-primary">follow</button>
+                        <follow-button url="{{ route('follow.store', ['user' => $user->id]) }}"></follow-button>
                     </div>
 
                     @can('update', $user->profile)

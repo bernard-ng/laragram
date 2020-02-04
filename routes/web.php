@@ -20,6 +20,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::post('/follow/{user}', 'FollowController@store')->name('follow.store');
+
 Route::get('/profile/{user}', 'ProfilesController@index')->name('profiles.show');
 Route::patch('/profile/{user}', 'ProfilesController@update')->name('profiles.update');
 Route::delete('/profile/{user}', 'ProfilesController@destroy')->name('profiles.destroy');
